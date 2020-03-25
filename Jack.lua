@@ -2119,11 +2119,11 @@ Text = [[
 
 🔰↬[Information](t.me/CV2VC)
 
-👮‍♂️↬[DEVELOPER](t.me/sajad14p)
+👮‍♂️↬[DEVELOPER](t.me/C_100K)
 
-👮‍♂️↬[DEVELOPER](t.me/tofy_6)
+👮‍♂️↬[DEVELOPER](t.me/moamelz)
 
-📌↬[To talk to us](t.me/rrrrybot)
+📌↬[To talk to us](t.me/IJ0BOT)
 ]]
 send(msg.chat_id_, msg.id_,Text)
 return false
