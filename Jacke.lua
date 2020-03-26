@@ -6,7 +6,7 @@ JSON  = dofile("./library/dkjson.lua")
 URL = require('socket.url')  
 utf8 = require ('lua-utf8') 
 database = redis.connect('127.0.0.1', 6379) 
-id_server = 2342443
+id_server = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
 --------------------------------------------------------------------------------------------------------------
 local AutoSet = function() 
 local create = function(data, file, uglify)  
@@ -62,6 +62,13 @@ cd $HOME/Jacke
 token="]]..database:get(id_server..":token")..[["
 while(true) do
 rm -fr ../.telegram-cli
+function print_logo() {
+echo -e "\e[34m   ______  __          _      _____    __    __ \e[0m"
+echo -e "\e[34m  | ____ ) | |        / \    / ____|  |  |  / / \e[0m"
+echo -e "\e[34m  |  ___ \ | |       / _ \   | |      |  \ /  \  \e[0m"
+echo -e "\e[34m  | |___)/ | |___   / ___ \  | |____  |  ___\  \  \e[0m"
+echo -e "\e[34m  |______/ |_____| /_/   \_\ \_____|  |__|   \__\ \e[0m"
+}
 if [ ! -f ./tg ]; then
 echo "=============================================="
 echo "TG IS NOT FIND IN FILES BOT"
@@ -74,6 +81,7 @@ echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE INFO.LUA \e[0m"
 echo "=============================================="
 exit 1
 fi
+print_logo
 echo -e "\033[38;5;208m"
 echo -e "                                                  "
 echo -e "\033[0;00m"
